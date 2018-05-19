@@ -190,3 +190,20 @@ for (x, y) in test_dataset:
     test_accuracy(prediction, y)
 
 print("Test set accuracy: {:.3%}".format(test_accuracy.result()))
+
+
+# Use the trained model to make predictions
+class_ids = ["Iris setosa", "Iris versicolor", "Iris virginica"]
+
+predict_dataset = tf.convert_to_tensor([
+    [5.1, 3.3, 1.7, 0.5, ],
+    [5.9, 3.0, 4.2, 1.5, ],
+    [6.9, 3.1, 5.4, 2.1]
+])
+
+predictions = model(predict_dataset)
+
+for i, logits in enumerate(predictions):
+    class_idx = tf.argmax(logits).numpy()
+    name = class_ids[class_idx]
+    print("Example {} prediction: {}".format(i, name))
