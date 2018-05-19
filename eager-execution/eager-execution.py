@@ -151,3 +151,17 @@ for epoch in range(num_epochs):
                   epoch,
                   epoch_loss_avg.result(),
                   epoch_accuracy.result()))
+
+
+# Visualize the loss function over time
+fig, axes = plt.subplots(2, sharex=True, figsize=(12, 8))
+fig.suptitle('Training Metrics')
+
+axes[0].set_ylabel("Loss", fontsize=14)
+axes[0].plot(train_loss_results)
+
+axes[1].set_ylabel("Accuracy", fontsize=14)
+axes[1].set_xlabel("Epoch", fontsize=14)
+axes[1].plot(train_accuracy_results)
+
+plt.show()
