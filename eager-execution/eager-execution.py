@@ -180,3 +180,13 @@ test_dataset = test_dataset.map(parse_csv)
 test_dataset = test_dataset.shuffle(1000)       # randomize
 # use the same batch size as the training set
 test_dataset = test_dataset.batch(32)
+
+
+# Evaluate the model on the test dataset
+test_accuracy = tfe.metrics.Accuracy()
+
+for (x, y) in test_dataset:
+    prediction = tf.argmax(model(x), axis=1, output_type=tf.int32)
+    test_accuracy(prediction, y)
+
+print("Test set accuracy: {:.3%}".format(test_accuracy.result()))
