@@ -66,3 +66,22 @@ train_dataset = train_dataset.batch(32)
 features, label = iter(train_dataset).next()
 print("example features:", features[0])
 print("example label:", label[0])
+
+
+# Create a model using Keras
+
+# The ideal number of hidden layers and neurons depends on the problem and the dataset.
+# Like many aspects of machine learning, picking the best shape of the neural network
+# requires a mixture of knowledge and experimentation.
+#
+# As a rule of thumb, increasing the number of hidden layers and neurons typically
+# creates a more powerful model, which requires more data to train effectively.
+model = tf.keras.Sequential(
+    [
+        tf.keras.layers.Dense(
+            10,
+            activation="relu",
+            input_shape=(4,)),  # input shape required
+        tf.keras.layers.Dense(10, activation="relu"),
+        tf.keras.layers.Dense(3)
+    ])
