@@ -53,3 +53,16 @@ def parse_csv(line):
     # Last field is the label
     label = tf.reshape(parsed_line[-1], shape=())
     return features, label
+
+
+# Create the training tf.data.Dataset
+train_dataset = tf.data.TextLineDataset(train_dataset_fp)
+train_dataset = train_dataset.skip(1)             # skip the first header row
+train_dataset = train_dataset.map(parse_csv)      # parse each row
+train_dataset = train_dataset.shuffle(buffer_size=1000)  # randomize
+train_dataset = train_dataset.batch(32)
+
+# View a single example entry from a batch
+features, label = iter(train_dataset).next()
+print("example features:", features[0])
+print("example label:", label[0])
