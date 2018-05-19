@@ -97,3 +97,9 @@ def grad(model, inputs, targets):
     with tf.GradientTape() as tape:
         loss_value = loss(model, inputs, targets)
     return tape.gradient(loss_value, model.variables)
+
+
+# Create an optimizer
+
+# This is a hyperparameter that you'll commonly adjust to achieve better results.
+optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)
